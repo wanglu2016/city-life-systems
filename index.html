@@ -1,0 +1,48 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="theme-color" content="#0b171c">
+  <meta name="description" content="进入一座会呼吸的城市。探索电力、通信、供水等九大生命网络，观察连锁反应，亲手修复城市。">
+  <title>城市的生命系统 · The Living City</title>
+  <link rel="icon" href="favicon.svg" type="image/svg+xml"><link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header class="header">
+    <a class="brand" href="./" aria-label="城市的生命系统首页"><span class="brand-icon"><svg viewBox="0 0 32 32"><path d="M3 17h6l3-9 5 17 5-11 2 3h5"/></svg></span><span><strong>城市的生命系统</strong><small>THE LIVING CITY</small></span></a>
+    <nav aria-label="体验模式"><button class="nav-button active" data-mode="explore"><span>01</span> 自由探索</button><button class="nav-button" data-mode="story"><span>02</span> 日常的背后</button><button class="nav-button" data-mode="emergency"><span>03</span> 城市急救</button></nav>
+    <div class="header-tools"><span class="live-dot"></span><span class="model-tag">一座虚构城市 · 机制模拟</span><button id="aboutButton" class="icon-button" aria-label="关于这个模型" title="关于这个模型">?</button></div>
+  </header>
+  <main class="workspace">
+    <aside class="layers panel">
+      <div class="section-label"><span>城市生命网络</span><span>09</span></div>
+      <button id="allLayer" class="all-layer active"><span class="mini-grid">▦</span><span>全城总览</span><span class="tiny">ALL</span></button>
+      <div id="layerList" class="layer-list"></div>
+      <div class="layer-footer"><span class="live-dot"></span><span>流动，才是城市的日常</span></div>
+      <div class="legend"><span><i class="good"></i>稳定</span><span><i class="warn"></i>承压</span><span><i class="bad"></i>受损</span></div>
+    </aside>
+    <section class="stage" aria-label="可探索的城市">
+      <canvas id="cityCanvas" aria-label="城市等距视图，拖动平移，滚轮缩放；也可用左侧网络按钮选择设施" tabindex="0"></canvas>
+      <div class="stage-heading"><div class="eyebrow"><span class="small-line"></span> 一座城，无数种连接</div><h1>看见城市的<span>脉搏。</span></h1><p id="stageSubtitle">每一盏灯亮起，都有一座城在协作。</p></div>
+      <div class="view-switch" role="group" aria-label="视图"><button class="active" data-view="city">城市</button><button data-view="underground">地下</button><button data-view="graph">依赖图</button></div>
+      <div id="mapLabels" class="map-labels"></div>
+      <div class="map-caption"><span class="map-name">澄川市</span><span>CHENGCHUAN · 18.6 万人的日常</span></div>
+      <div class="map-tools"><button id="zoomIn" aria-label="放大" title="放大">+</button><button id="zoomOut" aria-label="缩小" title="缩小">−</button><span></span><button id="rotate" aria-label="旋转视角" title="旋转视角（Q / E）">↻</button><button id="homeView" aria-label="复位视角" title="复位视角">⌖</button><button id="immersive" aria-label="沉浸漫游" title="沉浸漫游（Esc 退出）">⛶</button></div>
+      <div id="journeyOverlay" class="journey-overlay" hidden></div>
+      <div class="map-hint" id="mapHint"><span>拖动平移</span><i>·</i><span>滚轮缩放</span><i>·</i><span>点击设施</span></div>
+      <button class="exit-immersive" id="exitImmersive">退出漫游 <kbd>Esc</kbd></button>
+      <div class="compass"><span>N</span><svg viewBox="0 0 40 40"><path d="M20 5 28 31 20 26 12 31Z"/></svg></div>
+    </section>
+    <aside class="inspector panel">
+      <section class="vitals"><div class="section-label"><span>城市实时脉搏</span><span id="healthTag" class="status-tag">运行平稳</span></div><div class="vital-main"><div><strong id="healthNumber">100</strong><span>%</span><p>基本服务可用度</p></div><canvas id="pulseChart" width="130" height="66" aria-label="基本服务可用度趋势"></canvas></div><div class="mini-stats"><div><span>受到影响的人</span><b id="affectedNumber">0 <small>人</small></b></div><div><span>当前情景</span><b id="scenarioName">平常的一天</b></div></div></section>
+      <div id="inspectorBody"></div>
+    </aside>
+    <section class="timeline panel" aria-label="模拟时间"><div class="time-display"><span id="dayIcon">◷</span><strong id="clock">08:00</strong><span id="dayPeriod">早高峰</span></div><button id="pause" class="play-button" aria-label="暂停模拟">Ⅱ</button><div class="speed-group" role="group" aria-label="模拟速度"><button class="active" data-speed="1">1×</button><button data-speed="4">4×</button><button data-speed="12">12×</button></div><div class="day-slider"><span>00</span><input id="timeSlider" type="range" min="0" max="1439" value="480" aria-label="一天中的时间"><span>24</span></div><button id="motionButton" class="small-tool" aria-pressed="false" title="减少动态效果">动态 开</button><button id="soundButton" class="small-tool" aria-pressed="false" title="城市环境音">声音 关</button></section>
+  </main>
+  <section class="scenario-dock" aria-label="城市实验"><div class="dock-heading"><span class="eyebrow">改变一个条件</span><h2>整座城市，会怎样？</h2><button id="resetButton">↺ 重置城市</button></div><div id="scenarioList" class="scenario-list"></div></section>
+  <footer class="footer"><span>一个关于连接、依赖与韧性的交互实验</span><span>王路 <i>／</i> THE LIVING CITY <i>／</i> <button id="modelButton">模型说明 ↗</button></span></footer>
+  <div id="toast" class="toast" role="status" aria-live="polite"></div>
+  <dialog id="aboutDialog"><button id="closeAbout" class="dialog-close" aria-label="关闭模型说明">×</button><div class="eyebrow">关于这个实验</div><h2>一座城市，从来不止是建筑。</h2><p>我们熟悉街道和楼宇，却很少看见让它们运转的网络。这个项目把九张网络放在同一座虚构的城市中，让依赖、延迟、库存与冗余变得可见。</p><h3>你看到的数字是什么？</h3><p>澄川市、18.6 万人口、容量百分比、应急资源、恢复目标和缓冲时长，均为教学模型的假设，不对应真实城市、设备标准或现实预测。基本服务可用度是九个系统可用度的等权平均；“受到影响的人”是人口乘以服务损失的示意值，不代表独立受灾人口统计。</p><h3>影响怎样传递？</h3><p>每个系统有直接可用能力、上游依赖、库存缓冲和恢复惯性。上游受损会消耗缓冲，再逐步降低下游服务；备用措施提高服务底线。依赖图的箭头从提供服务的一端指向依赖它的一端，线宽表示本模型中的影响权重。模型按固定小步长计算，同一情景可重复。</p><h3>探索指南</h3><p>左侧选择网络，点击设施可暂停或恢复主设施。拖动城市平移、滚轮缩放，Q / E 旋转，方向键移动，空格暂停。地下视图透视管线；依赖图展示全网关系。城市急救用 10 点资源恢复基本服务，在模拟 30 分钟后达到 83% 可用度即可完成挑战。</p><p class="dialog-foot">无外部依赖 · 无账户 · 无数据采集 · 可离线运行</p></dialog>
+  <script type="module" src="app.js"></script>
+</body>
+</html>

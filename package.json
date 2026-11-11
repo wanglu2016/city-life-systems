@@ -1,0 +1,8 @@
+{
+  "name": "city-life-systems",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "description": "城市的生命系统 — 一座可以观察、干预与修复的城市",
+  "scripts": {"build": "node scripts/build.mjs", "test": "node tests/model.test.mjs"}
+}
