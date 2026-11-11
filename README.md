@@ -4,6 +4,9 @@
 
 作者：王路
 
+在线体验：
+https://wanglu2016.github.io/city-life-systems/
+
 ![城市总览](docs/city-overview.png)
 
 这是一座虚构的「澄川市」。18.6 万人的日常，由电力、通信、供水、医疗、物流、交通、零售、学校、支付金融九大网络共同支撑。
